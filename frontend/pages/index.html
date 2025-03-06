@@ -3,17 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lost & Found System</title>
+    <title>Lost & Found Dashboard</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Lost & Found Management System</h1>
-        <p>Report lost or found items easily.</p>
-        <div class="buttons">
-            <a href="lost.html" class="btn">Report Lost Item</a>
-            <a href="found.html" class="btn">Report Found Item</a>
-            <a href="profile.html" class="btn">Profile</a>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Lost & Found</a>
+            <div class="nav-links">
+                <a href="lost.html" class="nav-link">Report Lost Item</a>
+                <a href="found.html" class="nav-link">Report Found Item</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+        <h2>Dashboard</h2>
+        <div class="cards">
+            <!-- Lost Items Card -->
+            <div class="card lost">
+                <h3>Lost Items</h3>
+                <p class="count">12</p>
+                <p class="description">Items reported as lost.</p>
+            </div>
+
+            <!-- Found Items Card -->
+            <div class="card found">
+                <h3>Found Items</h3>
+                <p class="count">8</p>
+                <p class="description">Items reported as found.</p>
+            </div>
+
+            <!-- Resolved Items Card -->
+            <div class="card resolved">
+                <h3>Resolved Items</h3>
+                <p class="count">5</p>
+                <p class="description">Items successfully returned.</p>
+            </div>
+        </div>
+
+        <!-- Lost Items Table -->
+        <div class="data-section">
+            <h3>Lost Items</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Wallet</td>
+                        <td>Library</td>
+                        <td>2023-10-01</td>
+                        <td>Not Found</td>
+                    </tr>
+                    <tr>
+                        <td>Phone</td>
+                        <td>Cafeteria</td>
+                        <td>2023-10-05</td>
+                        <td>Found</td>
+                    </tr>
+                    <!-- Add more rows dynamically from a database or backend -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Found Items Table -->
+        <div class="data-section">
+            <h3>Found Items</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Claimed By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Keys</td>
+                        <td>Parking Lot</td>
+                        <td>2023-10-03</td>
+                        <td>John Doe</td>
+                    </tr>
+                    <tr>
+                        <td>Backpack</td>
+                        <td>Auditorium</td>
+                        <td>2023-10-07</td>
+                        <td>Pending</td>
+                    </tr>
+                    <!-- Add more rows dynamically from a database or backend -->
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
