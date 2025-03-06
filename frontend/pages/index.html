@@ -27,21 +27,21 @@
             <!-- Lost Items Card -->
             <div class="card lost">
                 <h3>Lost Items</h3>
-                <p class="count">12</p>
+                <p class="count">0</p>
                 <p class="description">Items reported as lost.</p>
             </div>
 
             <!-- Found Items Card -->
             <div class="card found">
                 <h3>Found Items</h3>
-                <p class="count">8</p>
+                <p class="count">0</p>
                 <p class="description">Items reported as found.</p>
             </div>
 
             <!-- Resolved Items Card -->
             <div class="card resolved">
                 <h3>Resolved Items</h3>
-                <p class="count">5</p>
+                <p class="count">0</p>
                 <p class="description">Items successfully returned.</p>
             </div>
         </div>
@@ -55,23 +55,10 @@
                         <th>Item Name</th>
                         <th>Location</th>
                         <th>Date</th>
-                        <th>Status</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Wallet</td>
-                        <td>Library</td>
-                        <td>2025-10-01</td>
-                        <td>Not Found</td>
-                    </tr>
-                    <tr>
-                        <td>Phone</td>
-                        <td>Cafeteria</td>
-                        <td>2025-10-05</td>
-                        <td>Found</td>
-                    </tr>
-                    <!-- Add more rows dynamically from a database or backend -->
+                <tbody id="lost-items-table">
+                    <!-- Dynamic Data Fetched from Backend -->
                 </tbody>
             </table>
         </div>
@@ -85,26 +72,63 @@
                         <th>Item Name</th>
                         <th>Location</th>
                         <th>Date</th>
-                        <th>Claimed By</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Keys</td>
-                        <td>Parking Lot</td>
-                        <td>2025-10-03</td>
-                        <td>John Doe</td>
-                    </tr>
-                    <tr>
-                        <td>Backpack</td>
-                        <td>Auditorium</td>
-                        <td>2025-10-07</td>
-                        <td>Pending</td>
-                    </tr>
-                    <!-- Add more rows dynamically from a database or backend -->
+                <tbody id="found-items-table">
+                    <!-- Dynamic Data Fetched from Backend -->
                 </tbody>
             </table>
         </div>
     </div>
+
+    <script>
+        async function fetchLostAndFoundData() {
+            try {
+                // Fetch lost items
+                const lostResponse = await fetch("http://localhost:8080/api/lost");
+                const lostItems = await lostResponse.json();
+
+                // Fetch found items
+                const foundResponse = await fetch("http://localhost:8080/api/found");
+                const foundItems = await foundResponse.json();
+
+                // Update Lost Items Table
+                const lostTableBody = document.getElementById("lost-items-table");
+                lostTableBody.innerHTML = ""; // Clear previous data
+                lostItems.forEach(item => {
+                    let row = `<tr>
+                        <td>${item.name}</td>
+                        <td>${item.location}</td>
+                        <td>${item.lostDate}</td>
+                    </tr>`;
+                    lostTableBody.innerHTML += row;
+                });
+
+                // Update Found Items Table
+                const foundTableBody = document.getElementById("found-items-table");
+                foundTableBody.innerHTML = ""; // Clear previous data
+                foundItems.forEach(item => {
+                    let row = `<tr>
+                        <td>${item.name}</td>
+                        <td>${item.location}</td>
+                        <td>${item.foundDate}</td>
+                    </tr>`;
+                    foundTableBody.innerHTML += row;
+                });
+
+                // Update Dashboard Counters
+                document.querySelector(".card.lost .count").textContent = lostItems.length;
+                document.querySelector(".card.found .count").textContent = foundItems.length;
+                const resolvedCount = foundItems.filter(item => item.claimedBy).length;
+                document.querySelector(".card.resolved .count").textContent = resolvedCount;
+
+            } catch (error) {
+                console.error("Error fetching lost & found items:", error);
+            }
+        }
+
+        // Call the function when page loads
+        fetchLostAndFoundData();
+    </script>
 </body>
 </html>
