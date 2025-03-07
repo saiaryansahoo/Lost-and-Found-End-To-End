@@ -36,22 +36,22 @@ A **Spring Boot + MySQL** powered **Lost & Found** management system that helps 
 ## 🖥️ **Project Screenshots**  
 
 ### 📌 Homepage  
-![Homepage](screenshots/homepage.png)  
+![Homepage](assets/Home.png)  
 
 ### 🛠️ Report Lost Item  
-![Report Lost](screenshots/report_lost.png)  
+![Report Lost](assets/Lost.png)  
 
 ### 🎯 Report Found Item  
-![Report Found](screenshots/report_found.png)  
+![Report Found](assets/Found.png)  
 
 ### 📊 Dashboard  
-![Dashboard](screenshots/dashboard.png)  
+![Dashboard](assets/dashboard.png)  
 
-### 🔐 Login Page  
-![Login](screenshots/login.png)  
+### 👤 Profile  
+![Item Details](assets/Profile.png)
 
-### 🔄 Item Details  
-![Item Details](screenshots/item_details.png)  
+### 🔐 Singup/Login Page  
+![Login](assets/singup.png)  
 
 ## ⚡ **Setup & Installation**  
 
@@ -102,5 +102,10 @@ Contributions are always welcome! Feel free to fork and submit a PR.
 This project is **open-source** under the **MIT License**.  
 
 ---
+
+## Contact
+📧 **[LinkedIn](https://linkedin.com/in/saiaryansahoo)**
+
+🕸️ **[Portfolio](https://aryansahoo.me)**
   
-💡 *Built with ❤️ by [Your Name]*  
+💡 *Built with ❤️ by Aryan*  
