@@ -6,16 +6,15 @@
     <title>Login | Lost & Found</title>
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    
-    <!-- Prevent logged-in users from accessing login page -->
-    <script>
-        if (localStorage.getItem("token")) {
-            window.location.href = "index.html";
-        }
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="../css/auth.css"> <!-- Link to external CSS -->
 </head>
 <body>
-    <div class="auth-container">
+    <!-- Animated Background -->
+    <div id="particles-js"></div>
+
+    <!-- Auth Container -->
+    <div class="auth-container animate__animated animate__fadeInUp">
         <h2>Lost & Found</h2>
         <p>Welcome back! Please login or sign up to continue.</p>
 
@@ -58,33 +57,8 @@
         </form>
     </div>
 
-    <script>
-        // Prevent Login Page for Logged-in Users
-        function preventAuthPages() {
-            if (localStorage.getItem("token")) {
-                window.location.href = "index.html";
-            }
-        }
-
-        // Toggle between Login and Signup forms
-        function showLogin() {
-            document.getElementById('login-form').classList.add('active');
-            document.getElementById('signup-form').classList.remove('active');
-            document.getElementById('login-toggle').classList.add('active');
-            document.getElementById('signup-toggle').classList.remove('active');
-        }
-
-        function showSignup() {
-            document.getElementById('signup-form').classList.add('active');
-            document.getElementById('login-form').classList.remove('active');
-            document.getElementById('signup-toggle').classList.add('active');
-            document.getElementById('login-toggle').classList.remove('active');
-        }
-
-        // Call the function to check authentication
-        preventAuthPages();
-    </script>
-
-    <script src="../js/auth.js"></script> <!-- Authentication Script -->
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="../js/auth.js"></script> <!-- Link to external JS -->
 </body>
 </html>

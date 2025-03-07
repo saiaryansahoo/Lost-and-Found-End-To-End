@@ -20,7 +20,7 @@ body {
 /* Auth Container */
 .auth-container {
     max-width: 400px;
-    margin: 2rem auto;
+    margin: 0 auto;
     padding: 2rem;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
@@ -152,4 +152,15 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
 }
