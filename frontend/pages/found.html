@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report Found Item</title>
-    <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script src="../js/found.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="../css/found.css"> <!-- Link to external CSS -->
 </head>
 <body>
+    <!-- Animated Background -->
+    <div id="particles-js"></div>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
@@ -22,7 +25,7 @@
     </nav>
 
     <!-- Form Container -->
-    <div class="form-container">
+    <div class="form-container animate__animated animate__fadeInUp">
         <h2>Report a Found Item</h2>
         <form id="found-form">
             <div class="form-group">
@@ -40,5 +43,9 @@
             <button type="submit" class="btn submit-btn">Submit</button>
         </form>
     </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="../js/found.js"></script> <!-- Link to external JS -->
 </body>
 </html>

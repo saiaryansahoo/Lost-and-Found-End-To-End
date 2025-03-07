@@ -1,0 +1,155 @@
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Animated Background */
+#particles-js {
+    position: fixed; /* Fixed position to cover the entire viewport */
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    z-index: -1;
+}
+
+/* Auth Container */
+.auth-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-container h2 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+}
+
+/* Toggle Buttons */
+.toggle-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.toggle-btn {
+    background: transparent;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: 2px solid #ffdd57;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.toggle-btn.active {
+    background: #ffdd57;
+    color: #1a1a2e;
+}
+
+.toggle-btn:hover {
+    background: #ffdd57;
+    color: #1a1a2e;
+}
+
+/* Auth Forms */
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.auth-form h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+.form-group input:focus {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn {
+    background: #ffdd57;
+    color: #1a1a2e;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background: #ffcc29;
+    transform: translateY(-3px);
+}
+
+/* Animations */
+.animate__animated {
+    animation-duration: 1s;
+}
+
+.animate__fadeInUp {
+    animation-name: fadeInUp;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

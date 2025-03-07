@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script src="../js/profile.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="../css/profile.css"> <!-- Link to external CSS -->
 </head>
 <body>
+    <!-- Animated Background -->
+    <div id="particles-js"></div>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
@@ -22,7 +25,7 @@
     </nav>
 
     <!-- Profile Container -->
-    <div class="profile-container">
+    <div class="profile-container animate__animated animate__fadeInUp">
         <h2>User Profile</h2>
         <div class="profile-info">
             <p id="username">Username: Guest</p>
@@ -30,5 +33,9 @@
         </div>
         <button class="btn logout-btn" onclick="logout()">Logout</button>
     </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="../js/profile.js"></script> <!-- Link to external JS -->
 </body>
 </html>
