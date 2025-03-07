@@ -1,13 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    checkAuth(); // Ensure user is logged in
+    checkAuth(); // Ensure the user is logged in before accessing profile
     loadUserProfile();
 });
 
 // Function to check authentication and redirect if not logged in
 function checkAuth() {
-    const token = localStorage.getItem("token");
-    if (!token) {
-        window.location.replace("login.html"); // Redirect to login if not authenticated
+    if (!localStorage.getItem("token")) {
+        window.location.replace("login.html"); // Redirect to login page
     }
 }
 
@@ -23,31 +22,31 @@ function loadUserProfile() {
                 document.getElementById("username").textContent = `Username: ${user.username}`;
                 document.getElementById("email").textContent = `Email: ${user.email}`;
             } else {
-                showGuestUser();
+                setDefaultProfile();
             }
         } catch (error) {
             console.error("Error parsing user data:", error);
-            localStorage.removeItem("user"); // Clear corrupt data
-            showGuestUser();
+            localStorage.removeItem("user"); // Remove corrupted data
+            setDefaultProfile();
         }
     } else {
-        showGuestUser();
+        setDefaultProfile();
     }
 }
 
-// Helper function to show guest user details
-function showGuestUser() {
+// Function to set default profile values when no user data is available
+function setDefaultProfile() {
     document.getElementById("username").textContent = "Username: Guest";
     document.getElementById("email").textContent = "Email: N/A";
 }
 
 // Logout function
 function logout() {
-    localStorage.removeItem("token"); // Ensure token is removed
-    localStorage.removeItem("user"); // Remove user data
+    localStorage.removeItem("token"); // Remove token
+    localStorage.removeItem("user");  // Remove user data
 
     alert("Logged out successfully!");
 
-    // Redirect to login page
-    window.location.replace("login.html");
+    // Redirect to login page and prevent going back to profile/dashboard
+    window.location.replace("login.html"); 
 }

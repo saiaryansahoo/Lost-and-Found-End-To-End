@@ -4,18 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lost & Found Dashboard</title>
-    <link rel="stylesheet" href="../css/style.css">
-    
-    <!-- Redirect Unauthenticated Users -->
-    <script>
-        if (!localStorage.getItem("token")) {
-            window.location.href = "login.html";
-        }
-    </script>
-
+    <link rel="stylesheet" href="../css/index.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
+
+    <!-- Animated Background -->
+    <div id="particles-js"></div>
 
     <!-- Navigation Bar -->
     <nav class="navbar">
@@ -24,31 +20,31 @@
             <div class="nav-links">
                 <a href="lost.html" class="nav-link">Report Lost Item</a>
                 <a href="found.html" class="nav-link">Report Found Item</a>
-                <a href="profile.html" class="nav-link">Profile</a> <!-- User clicks here to log out -->
+                <a href="profile.html" class="nav-link">Profile</a>
             </div>
         </div>
     </nav>
 
     <!-- Dashboard -->
     <div class="dashboard">
-        <h2>Dashboard</h2>
+        <h2 class="animate__animated animate__fadeInUp">Dashboard</h2>
         <div class="cards">
             <!-- Lost Items Card -->
-            <div class="card lost">
+            <div class="card lost animate__animated animate__fadeInUp">
                 <h3>Lost Items</h3>
                 <p class="count">0</p>
                 <p class="description">Items reported as lost.</p>
             </div>
 
             <!-- Found Items Card -->
-            <div class="card found">
+            <div class="card found animate__animated animate__fadeInUp">
                 <h3>Found Items</h3>
                 <p class="count">0</p>
                 <p class="description">Items reported as found.</p>
             </div>
 
             <!-- Resolved Items Card -->
-            <div class="card resolved">
+            <div class="card resolved animate__animated animate__fadeInUp">
                 <h3>Resolved Items</h3>
                 <p class="count">0</p>
                 <p class="description">Items successfully returned.</p>
@@ -56,88 +52,38 @@
         </div>
 
         <!-- Lost Items Table -->
-        <div class="data-section">
+        <div class="data-section animate__animated animate__fadeInUp">
             <h3>Lost Items</h3>
             <table>
                 <thead>
                     <tr>
                         <th>Item Name</th>
                         <th>Location</th>
-                        <th>Date</th>
+                        <th>Contact Number</th>
                     </tr>
                 </thead>
-                <tbody id="lost-items-table">
-                    <!-- Dynamic Data Fetched from Backend -->
-                </tbody>
+                <tbody id="lost-items-table"></tbody>
             </table>
         </div>
 
         <!-- Found Items Table -->
-        <div class="data-section">
+        <div class="data-section animate__animated animate__fadeInUp">
             <h3>Found Items</h3>
             <table>
                 <thead>
                     <tr>
                         <th>Item Name</th>
                         <th>Location</th>
-                        <th>Date</th>
+                        <th>Contact Number</th>
                     </tr>
                 </thead>
-                <tbody id="found-items-table">
-                    <!-- Dynamic Data Fetched from Backend -->
-                </tbody>
+                <tbody id="found-items-table"></tbody>
             </table>
         </div>
     </div>
 
-    <script>
-        async function fetchLostAndFoundData() {
-            try {
-                // Fetch lost items
-                const lostResponse = await fetch("http://localhost:8080/api/lost");
-                const lostItems = await lostResponse.json();
-
-                // Fetch found items
-                const foundResponse = await fetch("http://localhost:8080/api/found");
-                const foundItems = await foundResponse.json();
-
-                // Update Lost Items Table
-                const lostTableBody = document.getElementById("lost-items-table");
-                lostTableBody.innerHTML = ""; // Clear previous data
-                lostItems.forEach(item => {
-                    let row = `<tr>
-                        <td>${item.name}</td>
-                        <td>${item.location}</td>
-                        <td>${item.lostDate}</td>
-                    </tr>`;
-                    lostTableBody.innerHTML += row;
-                });
-
-                // Update Found Items Table
-                const foundTableBody = document.getElementById("found-items-table");
-                foundTableBody.innerHTML = ""; // Clear previous data
-                foundItems.forEach(item => {
-                    let row = `<tr>
-                        <td>${item.name}</td>
-                        <td>${item.location}</td>
-                        <td>${item.foundDate}</td>
-                    </tr>`;
-                    foundTableBody.innerHTML += row;
-                });
-
-                // Update Dashboard Counters
-                document.querySelector(".card.lost .count").textContent = lostItems.length;
-                document.querySelector(".card.found .count").textContent = foundItems.length;
-                const resolvedCount = foundItems.filter(item => item.claimedBy).length;
-                document.querySelector(".card.resolved .count").textContent = resolvedCount;
-
-            } catch (error) {
-                console.error("Error fetching lost & found items:", error);
-            }
-        }
-
-        // Call the function when page loads
-        fetchLostAndFoundData();
-    </script>
+    <!-- Particle.js Script -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

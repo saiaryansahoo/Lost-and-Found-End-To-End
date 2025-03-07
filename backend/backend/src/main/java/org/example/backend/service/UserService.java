@@ -1,10 +1,11 @@
 package org.example.backend.service;
 
+import org.example.backend.config.jwt; // Import JWT Utility
 import org.example.backend.model.User;
 import org.example.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
+
 import java.util.Optional;
 
 @Service
@@ -12,14 +13,16 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private jwt jwtUtil; // Inject JWT Utility
+
     // Get all users
-    public List<User> getAllUsers() {
+    public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     // User Signup (Create User)
     public User createUser(User user) {
-        // Validate input before saving
         if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {
             throw new IllegalArgumentException("Username cannot be null or empty");
         }
@@ -38,8 +41,9 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // User Login (Authentication)
+    // User Login (Authenticate User)
     public Optional<User> authenticateUser(String email, String password) {
-        return userRepository.findByEmailAndPassword(email, password);
+        return userRepository.findByEmail(email)
+                .filter(user -> user.getPassword().equals(password)); // Check password
     }
 }

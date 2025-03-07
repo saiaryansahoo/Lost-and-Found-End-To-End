@@ -18,15 +18,21 @@ async function signup() {
             body: JSON.stringify({ username, email, password }),
         });
 
+        const data = await response.json();
+
         if (response.ok) {
-            const user = await response.json();
-            localStorage.setItem("token", user.token); // Store JWT token
-            localStorage.setItem("user", JSON.stringify(user)); // Store user data
-            alert("Signup successful! Redirecting to dashboard...");
-            window.location.replace("index.html"); // Redirect to dashboard
+            if (data.token) {
+                localStorage.setItem("token", data.token); // Store JWT token
+                localStorage.setItem("user", JSON.stringify(data.user)); // Store user data
+                
+                alert("Signup successful! Redirecting to dashboard...");
+                window.location.replace("index.html"); // Redirect to dashboard
+            } else {
+                alert("Signup successful, but no token received. Try logging in.");
+                window.location.replace("login.html");
+            }
         } else {
-            const errorMessage = await response.text();
-            alert("Signup failed: " + errorMessage);
+            alert("Signup failed: " + (data.message || "Unknown error"));
         }
     } catch (error) {
         console.error("Error:", error);
@@ -51,13 +57,18 @@ async function login() {
             body: JSON.stringify({ email, password }),
         });
 
-        if (response.ok) {
-            const data = await response.json();
-            localStorage.setItem("token", data.token); // Store JWT token
-            localStorage.setItem("user", JSON.stringify(data.user)); // Store user data ✅ FIXED
+        const data = await response.json();
 
-            alert("Login successful! Redirecting to dashboard...");
-            window.location.replace("index.html"); // Redirect to dashboard
+        if (response.ok) {
+            if (data.token) {
+                localStorage.setItem("token", data.token); // Store JWT token
+                localStorage.setItem("user", JSON.stringify(data.user)); // Store user data
+                
+                alert("Login successful! Redirecting to dashboard...");
+                window.location.replace("index.html"); // Redirect to dashboard
+            } else {
+                alert("Login successful, but no token received. Try logging in again.");
+            }
         } else {
             alert("Invalid credentials!");
         }
@@ -72,14 +83,15 @@ function logout() {
     localStorage.removeItem("token"); // Remove token from storage
     localStorage.removeItem("user"); // Remove user data
 
-    setTimeout(() => {
-        window.location.replace("login.html"); // Redirect to login page
-    }, 100); // Small delay to ensure storage is cleared
+    alert("Logged out successfully!");
+    window.location.replace("login.html"); // Redirect to login page
 }
 
 // Check if user is logged in (Redirect to login if not authenticated)
 function checkAuth() {
-    if (!localStorage.getItem("token")) {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
         window.location.replace("login.html"); // Redirect to login if not authenticated
     }
 }
@@ -94,16 +106,15 @@ function preventAuthPages() {
 // Function to display logged-in user info on profile page
 function displayUser() {
     const userData = localStorage.getItem("user");
-    if (userData) {
-        const user = JSON.parse(userData);
-        const usernameField = document.getElementById("username");
-        const emailField = document.getElementById("email");
 
-        if (usernameField) {
-            usernameField.innerText = `Username: ${user.username}`;
-        }
-        if (emailField) {
-            emailField.innerText = `Email: ${user.email}`;
+    if (userData) {
+        try {
+            const user = JSON.parse(userData);
+            document.getElementById("username").textContent = `Username: ${user.username}`;
+            document.getElementById("email").textContent = `Email: ${user.email}`;
+        } catch (error) {
+            console.error("Error parsing user data:", error);
+            localStorage.removeItem("user"); // Remove corrupted data
         }
     }
 }

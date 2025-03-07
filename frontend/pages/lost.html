@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report Lost Item</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <!-- <link rel="stylesheet" href="../css/style.css"> -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script src="../js/lost.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="../css/lost.css"> <!-- Link to external CSS -->
 </head>
 <body>
+    <!-- Animated Background -->
+    <div id="particles-js"></div>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
@@ -22,23 +26,27 @@
     </nav>
 
     <!-- Form Container -->
-    <div class="form-container">
+    <div class="form-container animate__animated animate__fadeInUp">
         <h2>Report a Lost Item</h2>
         <form id="lost-form">
             <div class="form-group">
-                <label for="itemName">Item Name</label>
-                <input type="text" id="itemName" placeholder="Enter item name" required>
+                <label for="name">Item Name</label>
+                <input type="text" id="name" placeholder="Enter item name" required>
             </div>
             <div class="form-group">
                 <label for="location">Location</label>
                 <input type="text" id="location" placeholder="Where did you lose it?" required>
             </div>
             <div class="form-group">
-                <label for="contactInfo">Your Contact</label>
-                <input type="text" id="contactInfo" placeholder="Your phone or email" required>
+                <label for="contactNumber">Your Contact Number</label>
+                <input type="text" id="contactNumber" placeholder="Your phone number" required>
             </div>
             <button type="submit" class="btn submit-btn">Submit</button>
         </form>
     </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="../js/lost.js"></script> <!-- Link to external JS -->
 </body>
 </html>

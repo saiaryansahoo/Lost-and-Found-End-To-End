@@ -17,9 +17,8 @@ public class LostItem {
     private Long id;
 
     private String name;
-    private String description;
     private String location;
-    private LocalDate lostDate;
+    private String contactNumber;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
