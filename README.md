@@ -31,7 +31,7 @@ A **Spring Boot + MySQL** powered **Lost & Found** management system that helps 
 | **Backend**    | Java, Spring Boot, JPA (MySQL) |
 | **Database**   | MySQL (Stores users & items) |
 | **Version Control** | Git & GitHub |
-| **Development Tools** | IntelliJ IDEA, Postman |
+| **Development Tools** | IntelliJ IDEA,VS Code, Postman |
 
 ## 🖥️ **Project Screenshots**  
 
@@ -57,8 +57,8 @@ A **Spring Boot + MySQL** powered **Lost & Found** management system that helps 
 
 ### 1️⃣ **Clone the Repository**  
 ```bash
-git clone https://github.com/YOUR_USERNAME/Lost-Found-Management.git
-cd Lost-Found-Management
+git clone https://github.com/YOUR_USERNAME/Lost-and-Found-End-To-End.git
+cd Lost-and-Found-End-To-End
 ```
 
 ### 2️⃣ **Backend Setup (Spring Boot)**  
