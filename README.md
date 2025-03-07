@@ -99,7 +99,7 @@ cd Lost-and-Found-End-To-End
 Contributions are always welcome! Feel free to fork and submit a PR.  
 
 ## ⚖️ **License**  
-This project is **open-source** under the **MIT License**.  
+This project is **open-source** under the **[GNU General Public License](LICENSE)**.  
 
 ---
 
