@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lost & Found Dashboard</title>
     <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Redirect Unauthenticated Users -->
+    <script>
+        if (!localStorage.getItem("token")) {
+            window.location.href = "login.html";
+        }
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
@@ -15,7 +24,7 @@
             <div class="nav-links">
                 <a href="lost.html" class="nav-link">Report Lost Item</a>
                 <a href="found.html" class="nav-link">Report Found Item</a>
-                <a href="profile.html" class="nav-link">Profile</a>
+                <a href="profile.html" class="nav-link">Profile</a> <!-- User clicks here to log out -->
             </div>
         </div>
     </nav>

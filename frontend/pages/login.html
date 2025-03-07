@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Lost & Found</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Prevent logged-in users from accessing login page -->
+    <script>
+        if (localStorage.getItem("token")) {
+            window.location.href = "index.html";
+        }
+    </script>
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Lost & Found</h2>
+        <p>Welcome back! Please login or sign up to continue.</p>
+
+        <!-- Toggle Buttons for Login/Signup -->
+        <div class="toggle-buttons">
+            <button class="toggle-btn active" id="login-toggle" onclick="showLogin()">Login</button>
+            <button class="toggle-btn" id="signup-toggle" onclick="showSignup()">Sign Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="auth-form active">
+            <h3>Login</h3>
+            <div class="form-group">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password" required>
+            </div>
+            <button type="button" class="btn" onclick="login()">Login</button>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signup-form" class="auth-form">
+            <h3>Sign Up</h3>
+            <div class="form-group">
+                <label for="signup-username">Username</label>
+                <input type="text" id="signup-username" placeholder="Choose a username" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" placeholder="Choose a password" required>
+            </div>
+            <button type="button" class="btn" onclick="signup()">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        // Prevent Login Page for Logged-in Users
+        function preventAuthPages() {
+            if (localStorage.getItem("token")) {
+                window.location.href = "index.html";
+            }
+        }
+
+        // Toggle between Login and Signup forms
+        function showLogin() {
+            document.getElementById('login-form').classList.add('active');
+            document.getElementById('signup-form').classList.remove('active');
+            document.getElementById('login-toggle').classList.add('active');
+            document.getElementById('signup-toggle').classList.remove('active');
+        }
+
+        function showSignup() {
+            document.getElementById('signup-form').classList.add('active');
+            document.getElementById('login-form').classList.remove('active');
+            document.getElementById('signup-toggle').classList.add('active');
+            document.getElementById('login-toggle').classList.remove('active');
+        }
+
+        // Call the function to check authentication
+        preventAuthPages();
+    </script>
+
+    <script src="../js/auth.js"></script> <!-- Authentication Script -->
+</body>
+</html>
