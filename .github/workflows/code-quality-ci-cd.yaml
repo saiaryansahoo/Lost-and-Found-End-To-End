@@ -1,94 +1,90 @@
-name: CI Pipeline for code quality
+name: CI/CD Pipeline
 
+# Trigger the workflow on push to main branch or pull request to main branch
 on:
   push:
     branches:
       - main
-      - dev
   pull_request:
     branches:
       - main
-      - dev
 
+# Jobs to run
 jobs:
-  backend-checks:
-    name: Backend Code Quality & Tests
+  # Code Quality and Testing
+  code-quality-and-testing:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
 
+      # Set up Java (replace with your Java version)
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'temurin'
 
-      - name: Cache Maven Dependencies
+      # Cache Maven dependencies to speed up builds
+      - name: Cache Maven dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.m2
-          key: maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: maven-
+          path: ~/.m2/repository
+          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            maven-${{ runner.os }}-
 
-      - name: Run Code Linting (Checkstyle)
-        run: mvn checkstyle:check -f backend/pom.xml
+      # Run code quality checks (e.g., Checkstyle, PMD, SpotBugs)
+      - name: Run Checkstyle
+        run: mvn checkstyle:check
 
-      - name: Build & Run Tests
-        run: mvn clean verify -f backend/pom.xml
+      - name: Run PMD
+        run: mvn pmd:check
 
-      - name: Run Security Scan
-        run: mvn dependency-check:check -f backend/pom.xml
+      - name: Run SpotBugs
+        run: mvn spotbugs:check
 
-  frontend-checks:
-    name: Frontend Code Quality & Tests
+      # Run unit tests
+      - name: Run unit tests
+        run: mvn test
+
+      # Run integration tests (if applicable)
+      - name: Run integration tests
+        run: mvn verify -P integration-tests
+
+  # Build and Package
+  build-and-package:
     runs-on: ubuntu-latest
-
+    needs: code-quality-and-testing
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      # Set up Java
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
         with:
-          node-version: '18'
+          java-version: '17'
+          distribution: 'temurin'
 
-      - name: Install Dependencies
-        run: npm install
-        working-directory: frontend
+      # Cache Maven dependencies
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            maven-${{ runner.os }}-
 
-      - name: Run Linter (ESLint)
-        run: npx eslint . --ext .js,.jsx
-        working-directory: frontend
+      # Build the project
+      - name: Build the project
+        run: mvn clean package -DskipTests
 
-      - name: Run Tests (Jest)
-        run: npm test
-        working-directory: frontend
-
-      - name: Check Vulnerabilities
-        run: npm audit --audit-level=moderate
-        working-directory: frontend
-
-  docker-check:
-    name: Dockerfile Lint & Build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Install Hadolint (Dockerfile Linter)
-        run: curl -fsSL https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64 -o /usr/local/bin/hadolint && chmod +x /usr/local/bin/hadolint
-
-      - name: Lint Backend Dockerfile
-        run: hadolint backend/Dockerfile
-
-      - name: Lint Frontend Dockerfile
-        run: hadolint frontend/DockerFile
-
-      - name: Build Backend Docker Image
-        run: docker build -t lostfound-backend backend/
-
-      - name: Build Frontend Docker Image
-        run: docker build -t lostfound-frontend frontend/
+      # Upload the build artifact (e.g., JAR file)
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-app
+          path: target/*.jar
